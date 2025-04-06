@@ -7,9 +7,10 @@ import messageRouter from "./routes/messageRoutes.js";
 import cookieParser from "cookie-parser";
 import userRouter from "./routes/userRoutes.js";
 import { app, server } from "./socket/socket.js";
+import connectCloudinary from "./configs/cloudinary.js";
 
 const PORT = process.env.PORT || 5000;
-const allowedOrigins = ["http://localhost:3000"];
+const allowedOrigins = ["http://localhost:3000",'https://pingme-chat-app.vercel.app'];
 
 // To parse incoming requests with JSON payload from req.body
 app.use(express.json());
@@ -25,6 +26,7 @@ app.use(
 app.use(cookieParser());
 // Database connection
 connectDB();
+connectCloudinary();
 
 // Routes
 app.use("/api/auth", authRouter);

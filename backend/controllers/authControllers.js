@@ -1,19 +1,13 @@
 import bcrypt from "bcryptjs";
-import { v2 as cloudinary } from "cloudinary";
+import streamifier from "streamifier";
 import generateToken from "../utils/generateToken.js";
 import User from "../models/userModel.js";
+import { v2 as cloudinary } from "cloudinary";
 
 // user signup
 export const signup = async (req, res) => {
   try {
-    const {
-      fullName,
-      username,
-      password,
-      confirmPassword,
-      gender,
-      profilePic,
-    } = req.body;
+    const { fullName, username, password, confirmPassword, gender } = req.body;
     if (!fullName || !username || !password || !confirmPassword || !gender) {
       return res.json({ success: false, message: "Incomplete credentials" });
     }
@@ -32,23 +26,38 @@ export const signup = async (req, res) => {
     }
     // Hashing password
     const hashedPassword = await bcrypt.hash(password, 10);
+
     // File upload
-    if (profilePic) {
-      const imageUrl = await cloudinary.uploader.upload(profilePic.path, {
-        resource_type: "image", // Specify it's an image
+
+    const uploadFromBuffer = (fileBuffer) => {
+      return new Promise((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream(
+          { resource_type: "image" },
+          (error, result) => {
+            if (result) {
+              resolve(result);
+            } else {
+              reject(error);
+            }
+          }
+        );
+        streamifier.createReadStream(fileBuffer).pipe(stream);
       });
+    };
 
-      return imageUrl.secure_url;
-    }
+    // Usage:
+    const result = await uploadFromBuffer(req.file.buffer);
+    const imageUrl = result.secure_url;
 
-    const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`;
-    const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`;
+    // const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`;
+    // const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`;
     const newUser = new User({
       fullName,
       username,
       password: hashedPassword,
       gender,
-      profilePic: gender === "male" ? boyProfilePic : girlProfilePic,
+      profilePic: imageUrl,
+      //   profilePic: gender === "male" ? boyProfilePic : girlProfilePic,
     });
 
     await newUser.save();
@@ -61,7 +70,7 @@ export const signup = async (req, res) => {
         userId: newUser._id,
         fullName: newUser.fullName,
         username: newUser.username,
-        profilePic: newUser.profilePic,
+        profilePic: imageUrl,
       },
     });
   } catch (error) {
@@ -99,7 +108,7 @@ export const login = async (req, res) => {
     });
   } catch (error) {
     console.log("Error logging in:", error.message);
-  return  res.json({ success: false, message: "Internal server errror" });
+    return res.json({ success: false, message: "Internal server errror" });
   }
 };
 

@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
 import Messages from "./Messages";
 import MessageInput from "./MessageInput";
-import NoChatSelected from "./NoChatSelected";
 import useConversation from "../zustand/useConversation";
 import useGetMessages from "../hooks/useGetMessages";
-import SideBar from "./SideBar";
+import SideBar from "./Sidebar";
 
 const MessageContainer = () => {
   const { selectedConversation, setSelectedConversation } = useConversation();
@@ -24,14 +23,14 @@ const MessageContainer = () => {
       ) : (
         <>
           {/* Header */}
-          <div className="flex items-center justify-between bg-gray-300 px-4 py-2 mb-2 overflow-y-auto">
+          <div className="flex items-center justify-between bg-gray-300 px-4 py-2 mb-2 overflow-y-auto relative">
             <span className="label-text pr-2 text-white">To</span>
             <span className=" text-green-700 font-bold">
               {selectedConversation.username}
             </span>
             <span
               onClick={() => setSelectedConversation(!selectedConversation)}
-              className=""
+              className="hover:cursor-pointer"
             >
               Back
             </span>
@@ -39,7 +38,9 @@ const MessageContainer = () => {
           {/* Messages */}
           <Messages messages={messages} />
           {/* <MessageInput /> */}
-          <MessageInput />
+         <div className=" absolute bottom-3 w-full">
+         <MessageInput />
+         </div>
         </>
       )}
     </div>

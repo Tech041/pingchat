@@ -36,7 +36,7 @@ const SearchInput = () => {
             onChange={(e) => setSearch(e.target.value)}
             value={search}
             type="text"
-            placeholder="Search..."
+            placeholder="Search a User..."
             className="rounded-full w-[80%] py-2 px-2 outline-none bg-inherit"
           />
           <button

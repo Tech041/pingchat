@@ -7,7 +7,7 @@ import PingWave from "./pages/pingWave/PingWave";
 
 const App = () => {
   return (
-    <main className="p-4 min-h-screen flex items-center justify-center">
+    <main className="p-4 min-h-screen w-full flex items-center justify-center">
       <ToastContainer />
       <Routes>
         <Route path="/" element={<Home />} />

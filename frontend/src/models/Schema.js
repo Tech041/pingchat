@@ -1,4 +1,6 @@
 import * as z from "zod";
+// For image
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 
 export const signUpSchema = z
   .object({
@@ -7,13 +9,8 @@ export const signUpSchema = z
     gender: z.enum(["male", "female"], { message: "Gender is required" }),
     password: z.string().min(6, { message: "Enter your password" }),
     confirmPassword: z.string(),
-    // profilePic: z
-    //   .any()
-    //   .transform((val) => (val instanceof FileList ? val[0] : val))
-    //   .refine((file) => !file || file instanceof File, {
-    //     message: "Please upload a valid file",
-    //   })
-    //   .optional(),
+    //    For image
+    image: z.string().optional(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords must match",
