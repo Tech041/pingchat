@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5000;
 const allowedOrigins = [
   "http://localhost:3000",
   "https://pingme-chat-app.vercel.app",
-  "https://pingmechat-app.onrender.com",
+  
 ];
 
 // To parse incoming requests with JSON payload from req.body
