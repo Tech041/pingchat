@@ -5,7 +5,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: ["https://pingme-chat-app.vercel.app"],
+    origin: ["https://pingme-chat-app.vercel.app", "http://localhost:3000"],
     methods: ["GET", "POST"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -26,7 +26,7 @@ io.on("connection", (Socket) => {
   if (userId !== "undefined") {
     userSocketMap[userId] = Socket.id;
   }
-  //   io.emit is ued to send event to all connected users
+  //   io.emit is used to send event to all connected users
   io.emit("getOnlineUsers", Object.keys(userSocketMap));
   Socket.on("disconnect", () => {
     console.log("A user disconnected", Socket.id);
