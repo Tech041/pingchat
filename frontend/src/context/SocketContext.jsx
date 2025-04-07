@@ -17,6 +17,7 @@ export const SocketContextProvider = ({ children }) => {
         query: {
           userId: authUser.userData.userId,
         },
+        withCredentials: true,
       });
       setSocket(socket);
       //   socket.on is used for listening for events on both client and server side

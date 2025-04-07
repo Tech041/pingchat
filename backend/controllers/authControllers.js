@@ -49,15 +49,13 @@ export const signup = async (req, res) => {
     const result = await uploadFromBuffer(req.file.buffer);
     const imageUrl = result.secure_url;
 
-    // const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`;
-    // const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`;
     const newUser = new User({
       fullName,
       username,
       password: hashedPassword,
       gender,
       profilePic: imageUrl,
-      //   profilePic: gender === "male" ? boyProfilePic : girlProfilePic,
+      
     });
 
     await newUser.save();
