@@ -16,7 +16,7 @@ const SideBar = () => {
         <PingConversation />
         <div className="divider px-3"></div>
         <Conversations />
-        <div className=" absolute bottom-0">{!loading && <LogoutButton />}</div>
+        <div className=" absolute bottom-2">{!loading && <LogoutButton />}</div>
       </div>
     </div>
   );

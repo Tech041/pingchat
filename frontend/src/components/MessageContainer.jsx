@@ -17,13 +17,13 @@ const MessageContainer = () => {
   }, [setSelectedConversation]);
 
   return (
-    <div className="w-full min-h-screen flex flex-col overflow-hidden pt-10 relative ">
+    <div className="w-full min-h-screen flex flex-col overflow-hidden pt-10  ">
       {!selectedConversation ? (
         <SideBar />
       ) : (
         <>
           {/* Header */}
-          <div className="flex items-center justify-between bg-gray-300 px-4 py-2 mb-2 overflow-y-auto ">
+          <div className="flex items-center justify-between bg-gray-300 px-4 py-2 mb-2 overflow-y-auto h-[10%] ">
             <span className="label-text pr-2 text-white">To</span>
             <span className=" text-green-700 font-bold">
               {selectedConversation.username}
@@ -37,10 +37,11 @@ const MessageContainer = () => {
           </div>
           {/* Messages */}
 
-          <Messages messages={messages} />
-
+          <div className="h-[80%]">
+            <Messages messages={messages} />
+          </div>
           {/* <MessageInput /> */}
-          <div className=" w-full absolute bottom-1">
+          <div className=" w-full h-[10%]">
             <MessageInput />
           </div>
         </>
