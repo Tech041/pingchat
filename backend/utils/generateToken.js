@@ -7,7 +7,7 @@ const generateToken = (userId, res) => {
     maxAge: 15 * 24 * 60 * 60 * 1000,
     // To prevent access of cookie from Javascript(cross site scripting attacks) we use httpOnly
     httpOnly: true,
-    sameSite: "strict",
+    sameSite: "none",
     secure: true,
   });
 };
