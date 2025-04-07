@@ -14,6 +14,7 @@ const useGetConversations = () => {
       axios.defaults.withCredentials = true;
       const { data } = await axios.get(backendUrl + "/api/users");
       if (data.success) {
+        console.log("All users here", data.users);
         setConversations(data.users);
       }
     } catch (error) {
