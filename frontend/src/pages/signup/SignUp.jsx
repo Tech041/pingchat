@@ -56,7 +56,7 @@ const SignUp = () => {
     if (authUser) {
       navigate("/");
     } else {
-      navigate("/login");
+      navigate("/sign-up");
     }
   }, [authUser]);
   return (
