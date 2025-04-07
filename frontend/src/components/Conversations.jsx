@@ -5,7 +5,9 @@ import useGetConversations from "../hooks/useGetConversations";
 const Conversations = () => {
   const { loading, conversations } = useGetConversations();
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log("Conversations are ", conversations);
+  }, []);
   return (
     <div className="py-2 flex flex-col overflow-auto">
       {conversations.map((conversation, idx) => (
