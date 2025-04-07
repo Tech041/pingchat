@@ -43,7 +43,11 @@ const Login = () => {
     }
   };
   useEffect(() => {
-    authUser && navigate("/");
+    if (authUser) {
+      navigate("/");
+    } else {
+      navigate("/login");
+    }
   }, [authUser]);
   return (
     <section className="flex flex-col items-center justify-center min-w-96 mx-auto  ">
