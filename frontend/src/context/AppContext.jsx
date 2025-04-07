@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import run from "../config/Gemini";
 
 export const AppContext = createContext();
-const backendUrl = "http://localhost:5000";
+const backendUrl = import.meta.env.VITE_BACKEND_URL
 export const AppContextProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState({});
