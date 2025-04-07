@@ -19,6 +19,7 @@ const useGetMessages = () => {
           ` ${backendUrl}/api/messages/${selectedConversation._id}`
         );
         if (data.success) {
+          console.log("Messages retured are", data.messages);
           setMessages(data.messages);
         }
       } catch (error) {
