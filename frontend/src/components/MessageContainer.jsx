@@ -17,7 +17,7 @@ const MessageContainer = () => {
   }, [setSelectedConversation]);
 
   return (
-    <div className="w-full min-h-screen flex flex-col overflow-hidden pt-10 ">
+    <div className="w-full min-h-screen flex flex-col overflow-hidden pt-10 relative ">
       {!selectedConversation ? (
         <SideBar />
       ) : (
@@ -36,9 +36,11 @@ const MessageContainer = () => {
             </span>
           </div>
           {/* Messages */}
+
           <Messages messages={messages} />
+
           {/* <MessageInput /> */}
-          <div className=" w-full">
+          <div className=" w-full absolute bottom-1">
             <MessageInput />
           </div>
         </>

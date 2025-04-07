@@ -16,9 +16,38 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [image, setImage] = useState("");
 
+  // Error state
+  const [inputError, setInputEror] = useState("");
+  const [passsordInputError, setPasswordInputEror] = useState("");
+  const [passsordLengthError, setPasswordLengthError] = useState("");
+
   const handleSignUp = async (e) => {
     e.preventDefault();
-
+    if (
+      !fullName ||
+      !username ||
+      !password ||
+      !confirmPassword ||
+      !gender ||
+      !image
+    ) {
+      setInputEror("One or more fields are missing");
+      return;
+    } else {
+      setInputEror("");
+    }
+    if (password !== confirmPassword) {
+      setPasswordInputEror("Passwords don't match");
+      return;
+    } else {
+      setPasswordInputEror("");
+    }
+    if (password.length < 6) {
+      setPasswordLengthError("Password must be 6 or greater");
+      return;
+    } else {
+      setPasswordLengthError("");
+    }
     try {
       setLoading(true);
       const formData = new FormData();
@@ -83,9 +112,7 @@ const SignUp = () => {
               placeholder="Enter your full name..."
             />
           </div>
-          {/* {errors.fullName && (
-            <p className="text-red-600">{errors.fullName.message}</p>
-          )}{" "} */}
+          {inputError && <p className="text-red-600">{inputError}</p>}
           <div className="">
             <label htmlFor="username" className="label p-2">
               <span className="text-base label-text">Username</span>
@@ -99,9 +126,8 @@ const SignUp = () => {
               placeholder="Enter Username..."
             />
           </div>
-          {/* {errors.username && (
-            <p className="text-red-600">{errors.username.message}</p>
-          )} */}
+          {inputError && <p className="text-red-600">{inputError}</p>}
+
           <div className="">
             <label htmlFor="password" className="label">
               <span className="text-base label-text">Password</span>
@@ -117,9 +143,11 @@ const SignUp = () => {
               />
             </span>
           </div>
-          {/* {errors.password && (
-            <p className="text-red-600">{errors.password.message}</p>
-          )} */}
+          {inputError && <p className="text-red-600">{inputError}</p>}
+          {passsordLengthError && (
+            <p className="text-red-600">{passsordLengthError}</p>
+          )}
+
           <div className="">
             <label htmlFor="confirmPassword" className="label">
               <span className="text-base label-text">Confirm Password</span>
@@ -135,9 +163,11 @@ const SignUp = () => {
               />
             </span>
           </div>
-          {/* {errors.confirmPassword && (
-            <p className="text-red-600">{errors.confirmPassword.message}</p>
-          )} */}
+          {inputError && <p className="text-red-600">{inputError}</p>}
+          {passsordInputError && (
+            <p className="text-red-600">{passsordInputError}</p>
+          )}
+
           {/* Gender checkbox here */}
           <div className="flex pt-2">
             <div className="form-control pr-2">
@@ -167,9 +197,8 @@ const SignUp = () => {
               </label>
             </div>
           </div>
-          {/* {errors.gender && (
-            <p className="text-red-600">{errors.gender.message}</p>
-          )} */}
+          {inputError && <p className="text-red-600">{inputError}</p>}
+
           {/* File upload  */}
           <div className="form-control pt-5">
             <label htmlFor="image" className=" flex items-center gap-4">
@@ -192,6 +221,7 @@ const SignUp = () => {
               </span>
             </label>
           </div>
+          {inputError && <p className="text-red-600">{inputError}</p>}
           <div className="">
             <Link
               to={"/login"}
