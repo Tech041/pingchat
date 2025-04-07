@@ -5,7 +5,11 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: ["https://pingme-chat-app.vercel.app", "http://localhost:3000"],
+    origin: [
+      "https://pingme-chat-app.vercel.app",
+      "http://localhost:3000",
+      "https://pingmechat-app.onrender.com",
+    ],
     methods: ["GET", "POST"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],

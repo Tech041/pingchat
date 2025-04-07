@@ -10,7 +10,11 @@ import { app, server } from "./socket/socket.js";
 import connectCloudinary from "./configs/cloudinary.js";
 
 const PORT = process.env.PORT || 5000;
-const allowedOrigins = ["http://localhost:3000",'https://pingme-chat-app.vercel.app'];
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://pingme-chat-app.vercel.app",
+  "https://pingmechat-app.onrender.com",
+];
 
 // To parse incoming requests with JSON payload from req.body
 app.use(express.json());

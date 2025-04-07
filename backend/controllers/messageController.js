@@ -42,7 +42,7 @@ export const sendMessage = async (req, res) => {
       // this io.to is used to send message to specific client/user
       io.to(receiverSocketId).emit("newMessage", newMessage);
     }
-
+    console.log("This is new message", newMessage);
     return res.json({ success: true, newMessage });
   } catch (error) {
     console.log("ErrorError in sendMessage controller:", error.message);
@@ -70,9 +70,10 @@ export const getMessage = async (req, res) => {
       return res.json([]);
     }
     const messages = conversation.messages;
+    console.log("Getting messages", messages.length);
     return res.json({ success: true, messages });
   } catch (error) {
     console.log("Error in getMessage controller:", error.message);
-   return res.json({ success: false, message: "Internal server errror" });
+    return res.json({ success: false, message: "Internal server errror" });
   }
 };
