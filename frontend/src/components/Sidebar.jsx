@@ -9,14 +9,14 @@ const SideBar = () => {
   const { loading } = useGetConversations();
 
   return (
-    <div className=" h-screen  w-full  flex flex-col overflow-scroll">
+    <div className=" h-screen  w-full  flex flex-col overflow-scroll relative">
       <div className=" w-full h-full px-4 mb-40 pb-20">
         <SearchInput />
         <div className="divider px-3"></div>
         <PingConversation />
         <div className="divider px-3"></div>
         <Conversations />
-        {!loading && <LogoutButton />}
+        <div className=" absolute bottom-0">{!loading && <LogoutButton />}</div>
       </div>
     </div>
   );
