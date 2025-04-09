@@ -1,4 +1,4 @@
-import React, { useEffect,} from "react";
+import React, { useEffect } from "react";
 import Messages from "./Messages";
 import MessageInput from "./MessageInput";
 import useConversation from "../zustand/useConversation";
@@ -29,7 +29,10 @@ const MessageContainer = () => {
               {selectedConversation.username}
             </span>
             <span
-              onClick={() => setSelectedConversation(!selectedConversation)}
+              onClick={() => {
+                setSelectedConversation(!selectedConversation);
+                window.location.reload();
+              }}
               className="hover:cursor-pointer"
             >
               Back

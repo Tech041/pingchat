@@ -5,7 +5,7 @@ import NoChatSelected from "../../components/NochatSelected";
 
 const Home = () => {
   const { authUser, navigate } = useContext(AppContext);
-  const [greeting, setGreeting] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!authUser) {
@@ -15,8 +15,8 @@ const Home = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setGreeting(false);
-    }, 7000);
+      setLoading(false);
+    }, 50);
     return () => {
       clearTimeout(timer);
     };
@@ -26,7 +26,11 @@ const Home = () => {
     <section className="flex  justify-center  h-screen w-screen rounded-lg overflow-hidden  bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
       <div className="w-[98%]  overflow-auto">
         {/* <SideBar /> */}
-        {greeting ? <NoChatSelected /> : <MessageContainer />}
+        {loading ? (
+          <span className="loading loading-spinner"></span>
+        ) : (
+          <MessageContainer />
+        )}
       </div>
     </section>
   );
