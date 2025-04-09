@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import run from "../config/Gemini";
 
 export const AppContext = createContext();
-const backendUrl = import.meta.env.VITE_BACKEND_URL
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 export const AppContextProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState({});
@@ -81,6 +81,7 @@ export const AppContextProvider = ({ children }) => {
       data.success && setAuthUser("");
       localStorage.removeItem("chat-user");
       setLoading(false);
+      navigate("/login");
     } catch (error) {
       toast.error(error.message);
       return;
