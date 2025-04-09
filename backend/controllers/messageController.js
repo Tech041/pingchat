@@ -77,3 +77,13 @@ export const getMessage = async (req, res) => {
     return res.json({ success: false, message: "Internal server errror" });
   }
 };
+
+// Delete message function
+export const deleteMessage = async (req, res) => {
+  const messageId = req.params.id;
+  const updateMessage = await Message.findByIdAndDelete(messageId);
+  if (!updateMessage) {
+    return res.json({ success: false, message: "Message not found" });
+  }
+  return res.json({ success: true, updateMessage });
+};

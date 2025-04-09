@@ -8,6 +8,8 @@ export const AppContextProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(false);
+  const [messageId, setMessageId] = useState("");
+  const [deleteMessage, setDeleteMessage] = useState("");
   const [authUser, setAuthUser] = useState(
     JSON.parse(localStorage.getItem("chat-user"))
   );
@@ -83,6 +85,11 @@ export const AppContextProvider = ({ children }) => {
     navigate,
     loading,
     setLoading,
+    messageId,
+    setMessageId,
+    deleteMessage,
+
+    setDeleteMessage,
 
     // For gemini
     prevPrompt,

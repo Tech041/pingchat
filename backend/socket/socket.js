@@ -6,7 +6,7 @@ const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
     origin: ["https://pingme-chat-app.vercel.app", "http://localhost:3000"],
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "DELETE"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
   },

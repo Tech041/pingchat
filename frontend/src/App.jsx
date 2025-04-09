@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import PingWave from "./pages/pingWave/PingWave";
 
+
 const App = () => {
   return (
     <main className="p-4 min-h-screen w-full flex items-center justify-center">

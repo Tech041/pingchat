@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const PingConversation = () => {
   return (
-    <Link to={"/ping-wave"} className=" flex items-center justify-between">
+    <Link to={"/ping-wave"} className=" flex items-center justify-between px-4">
       <img
         src={assets.user_icon}
         alt="pingwave_icon"
