@@ -122,3 +122,20 @@ export const logout = async (req, res) => {
     res.json({ success: false, message: "Internal server errror" });
   }
 };
+
+// Delete user
+export const deleteUser = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const deletedUser = await User.findByIdAndDelete(userId);
+    console.log("Account deleted");
+    if (!deletedUser) {
+      return res.json({ success: false, message: "Error deleting account" });
+    } else {
+      return res.json({ success: true, message: "Account deleted" });
+    }
+  } catch (error) {
+    console.log("Error deleteuser controller:", error.message);
+    res.json({ success: false, message: "Internal server errror" });
+  }
+};

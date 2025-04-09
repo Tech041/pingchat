@@ -1,23 +1,29 @@
-import React, { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useContext, useState } from "react";
 
-const useLogout = () => {
+const useDeleteAccount = () => {
   const [loading, setLoading] = useState(false);
-  //   const navigate = useNavigate();
-  const { setAuthUser, backendUrl, navigate } = useContext(AppContext);
+  const { setAuthUser, authUser, backendUrl, navigate } =
+    useContext(AppContext);
 
-  const logout = async () => {
+  //   const navigate = useNavigate();
+
+  const deleteAccount = async () => {
+    const userId = authUser.userData.userId;
     setLoading(true);
     try {
       axios.defaults.withCredentials = true;
-      const { data } = await axios.post(backendUrl + "/api/auth/logout");
+      const { data } = await axios.post(backendUrl + "/api/auth/delete", {
+        userId,
+      });
       if (data.success) {
         setAuthUser("");
         navigate("/login");
         localStorage.removeItem("chat-user");
         setLoading(false);
+        toast.success("Account deleted");
       } else {
         toast.error(data.message);
       }
@@ -26,7 +32,7 @@ const useLogout = () => {
       return;
     }
   };
-  return { logout, loading };
+  return { deleteAccount, loading };
 };
 
-export default useLogout;
+export default useDeleteAccount;
