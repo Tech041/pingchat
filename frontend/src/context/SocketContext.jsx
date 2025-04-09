@@ -36,30 +36,30 @@ export const SocketContextProvider = ({ children }) => {
 
   // Logging out for debug
 
-  useEffect(() => {
-    if (authUser) {
-      const socket = io(backendUrl, {
-        query: { userId: authUser.userData.userId },
-        withCredentials: true,
-      });
-      setSocket(socket);
+  // useEffect(() => {
+  //   if (authUser) {
+  //     const socket = io(backendUrl, {
+  //       query: { userId: authUser.userData.userId },
+  //       withCredentials: true,
+  //     });
+  //     setSocket(socket);
 
-      socket.on("connect", () => {
-        console.log("Socket connected:", socket.id);
-      });
+  //     socket.on("connect", () => {
+  //       console.log("Socket connected:", socket.id);
+  //     });
 
-      socket.on("getOnlineUsers", (users) => {
-        console.log("Online users from server:", users);
-        setOnlineUsers(users);
-      });
+  //     socket.on("getOnlineUsers", (users) => {
+  //       console.log("Online users from server:", users);
+  //       setOnlineUsers(users);
+  //     });
 
-      socket.on("connect_error", (err) => {
-        console.error("Socket connection error:", err.message);
-      });
+  //     socket.on("connect_error", (err) => {
+  //       console.error("Socket connection error:", err.message);
+  //     });
 
-      return () => socket.close();
-    }
-  }, [authUser]);
+  //     return () => socket.close();
+  //   }
+  // }, [authUser]);
   const value = {
     socket,
     onlineUsers,

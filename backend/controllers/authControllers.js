@@ -55,7 +55,6 @@ export const signup = async (req, res) => {
       password: hashedPassword,
       gender,
       profilePic: imageUrl,
-      
     });
 
     await newUser.save();
@@ -85,6 +84,9 @@ export const login = async (req, res) => {
       return res.json({ success: false, message: "Incomplete credentials" });
     }
     const user = await User.findOne({ username });
+    if (!user) {
+      return res.json({ success: false, message: "User does not exist" });
+    }
 
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
