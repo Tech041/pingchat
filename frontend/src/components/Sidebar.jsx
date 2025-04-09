@@ -12,7 +12,7 @@ const SideBar = () => {
   const { authUser } = useContext(AppContext);
 
   return (
-    <div className=" h-screen  w-full  flex flex-col overflow-scroll relative">
+    <div className=" h-full  w-full  flex flex-col overflow-scroll relative">
       <div className="flex items-center justify-center">
         <div className="py-3">
           <p className="text-center">Hello {authUser.userData.fullName} ❤️</p>
