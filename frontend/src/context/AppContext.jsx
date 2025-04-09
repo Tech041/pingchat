@@ -1,19 +1,18 @@
-import axios from "axios";
 import { createContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import run from "../config/Gemini";
+import { useNavigate } from "react-router-dom";
 
 export const AppContext = createContext();
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 export const AppContextProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState({});
+  const [loading, setLoading] = useState(false);
   const [authUser, setAuthUser] = useState(
     JSON.parse(localStorage.getItem("chat-user"))
   );
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
   // For Gemini
   const [input, setInput] = useState("");
   const [recentPrompt, setRecentPrompt] = useState("");
@@ -73,32 +72,17 @@ export const AppContextProvider = ({ children }) => {
 
   // Logging out function
 
-  const logout = async () => {
-    setLoading(true);
-    try {
-      axios.defaults.withCredentials = true;
-      const { data } = await axios.post(backendUrl + "/api/auth/logout");
-      data.success && setAuthUser("");
-      localStorage.removeItem("chat-user");
-      setLoading(false);
-      navigate("/login");
-    } catch (error) {
-      toast.error(error.message);
-      return;
-    }
-  };
   const value = {
     backendUrl,
     isLoggedIn,
     setIsLoggedIn,
     userData,
     setUserData,
-    navigate,
-    logout,
-    loading,
-    setLoading,
     authUser,
     setAuthUser,
+    navigate,
+    loading,
+    setLoading,
 
     // For gemini
     prevPrompt,
