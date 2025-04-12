@@ -10,7 +10,7 @@ Features
 - User account deletion
 
 Technologies Used
-- Frontend: React.js
+- Frontend: React.js,Tailwind CSS,daisyui
 - Backend: Node.js, Express.js
 - Database: MongoDB
 - Real-time communication: Socket.IO
