@@ -8,7 +8,7 @@ const DeleteButton = () => {
       {loading ? (
         <span className="loading loading-spinner"></span>
       ) : (
-        "Delete Account"
+        <button className="text-[12px] px-3 py-1 bg-red-500 text-white rounded-lg">Delete Account</button>
       )}
     </div>
   );

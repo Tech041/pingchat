@@ -1,10 +1,9 @@
 import React, { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import useConversation from "../zustand/useConversation";
-import DeleteChat from "./DeleteChat";
 
 const Message = ({ message }) => {
-  const { authUser, setMessageId, deleteMessage } = useContext(AppContext);
+  const { authUser, setMessageId } = useContext(AppContext);
   const { selectedConversation } = useConversation();
   const fromMe = message.senderId === authUser.userData.userId;
   const chatClassName = fromMe ? " chat-end" : "chat-start";
@@ -24,15 +23,8 @@ const Message = ({ message }) => {
       </div>
 
       <div className="flex items-center gap-2">
-        <div className="">
-          {deleteMessage !== message._id && <DeleteChat />}
-        </div>
         <div className={`chat-bubble text-black ${shakeClass} ${bgColor}`}>
-          {deleteMessage === message._id ? (
-            <span className="text-red-500 text-base italic">deleted</span>
-          ) : (
-            message.message
-          )}
+          {message.message}
         </div>
       </div>
 
